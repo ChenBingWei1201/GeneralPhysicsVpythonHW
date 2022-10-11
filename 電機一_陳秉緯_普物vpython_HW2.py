@@ -3,13 +3,13 @@ from vpython import*
 ### the background ###
 N = 2                    # the balls are lifted
 g = vector(0,-9.8,0)     # g = 9.8m/s^2
-m = 1                    # mass = 1KG 
+m = 1                    # mass = 1kg 
 size = 0.2               # ball radius = 0.2 meter
 dt, k = 0.0001, 150000
 L = 2 - m*mag(g)/k       # rope origin length
-scene = canvas(width = 800, height = 400, center = vec(0, -1, 0), background = vec(0.6, 0.7, 0.98))
+scene = canvas(width = 450, height = 400, center = vec(0, -1, 0), background = vec(0.6, 0.7, 0.98), align  = "left")
 
-### the object ###
+#the object 
 pivots = []
 balls = []
 ropes = []
@@ -17,7 +17,7 @@ for i in range(5):
     pivot = sphere(radius = 0.05, pos = vec((i-2)*0.4, 0, 0), color = color.black)
     pivots.append(pivot)
 
-    ball = sphere(radius = size, pos = vec((i-2)*0.4, -2.0, 0), color = color.orange)
+    ball = sphere(radius = size, pos = vec((i-2)*0.4, -2.0, 0), color = color.magenta)
     ball.v = vector(0, 0, 0)
     balls.append(ball)
 
@@ -46,14 +46,14 @@ def collision_1(v1, v2, m1=1, m2=1):
     return (v1_after, v2_after)'''
 
 ### the graph and function ###
-E_instant = graph(width = 400, align = 'left')
-E_average = graph(width = 400, align = 'left')
+E_instant = graph(width = 350, height = 200, align = 'right')
+E_average = graph(width = 350, height = 200, align = 'right')
 
-func_K_i = gdots(graph = E_instant, color = color.yellow, size = 1)
-func_U_i = gdots(graph = E_instant, color = color.red, size = 1)
+func_K_i = gcurve(graph = E_instant, color = color.red, size = 1)
+func_U_i = gcurve(graph = E_instant, color = color.blue, size = 1)
 
-func_K_a = gdots(graph = E_average, color = color.yellow, size = 1)
-func_U_a = gdots(graph = E_average, color = color.red, size = 1)
+func_K_a = gcurve(graph = E_average, color = color.red, size = 1)
+func_U_a = gcurve(graph = E_average, color = color.blue, size = 1)
 K_i, U_i, K_a, U_a = 0, 0, 0, 0
 
 ########################## stimulation ###############################
@@ -99,3 +99,4 @@ while True:
     func_U_i.plot(pos = (t, U_i))
     func_K_a.plot(pos = (t, K_a/t))
     func_U_a.plot(pos = (t, U_a/t))
+
