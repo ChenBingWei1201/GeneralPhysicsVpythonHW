@@ -1,17 +1,3 @@
-Homework:
-write a program for Newton’s cradle with 5 balls. The dimensions of the cradle and the initial conditions, in 
-which all balls are at rest, are shown in the figure below. The mass of each ball is 1kg, and the radius of each 
-ball is 0.2m and the distance between any two adjacent pivots are 0.4m.  The program need to have a variable 
-N that indicates how many balls are lifted at the beginning, for example in the figure N=2. In the program, 
-also use dt, k, g = 0.0001, 150000, vector(0,-9.8,0) for the time step of the simulation, the force constant of 
-the rope, and the gravitation acceleration, respectively. And the simulation is set at rate(5000). 
-Also (1) In one graph, plot versus time both the total of the instant kinetic energies of all balls, and the total 
-of the instant gravitational potential energy of all balls (the potential energy of the balls at the lowest 
-positions are taken to be 0). (2) In a second graph, plot versus time the averaged total kinetic energy over 
-the time period (from the beginning of the simulation till the time of the current plot point) and the averaged 
-total gravitational potential energy. 
-''' 
-
 from vpython import*
 
 ### the background ###
