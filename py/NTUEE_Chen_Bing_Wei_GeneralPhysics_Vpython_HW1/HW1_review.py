@@ -1,28 +1,49 @@
 from vpython import *
+g=9.8 
+size = 0.25 
+height = 15.0 
+C_drag = 0.9
+theta = pi/4
 
-scene = canvas(width = 600, height = 600, background = vec(0.5, 0.5, 0))
+scene = canvas(width=600, height=400, center =vec(0,height/2,0), background=vec(0.5,0.5,0), align = "left")
+floor = box(length=30, height=0.01, width=10, color=color.blue)
+ball = sphere(radius = size, color=color.red, make_trail = True)
+ball.pos = vec(-15, size, 0)
+ball.v = vec(20*cos(theta), 20*sin(theta), 0)
 
-g = 9.8 # g = 9.8 m/s^2
-size = 0.25 # ball radius = 0.25 m
-height = 15.0 # ball center initial height = 15 m
-scene = canvas(width = 800, height = 800, center = vec(0, height/2, 0), background = vec(0.5, 0.5, 0)) # open a window
-floor = box(length = 30, height = 0.01, width = 10, color = color.blue) # the floor
-ball = sphere(radius = size, color = color.red, make_trail = True, trail_radius = 0.05) # the ball
-ball.pos = vec( 0, height, 0) # ball center initial position
-ball.v = vec(0, 0 , 0) # ball initial velocity
-msg =text(text = 'Free Fall', pos = vec(-10, 10, 0))
-
-a1 = arrow(color = color.green, shaftwidth = 0.1)
+a1 = arrow(color = color.green, shaftwidth = size/3, length = 3*size)
 a1.pos = ball.pos
-a1.axis = vec(0, -1, 0)
+a1.axis = ball.v / ball.v.mag * 2
 
+v_t = graph(title = "v-t graph", xtitle = "t", ytitle = "v", align = "right", width = 600)
+f1 = gcurve(graph = v_t, color = color.red, width = 4)
 
-dt = 0.001 # time step
-while ball.pos.y >= size: # until the ball hit the ground
-    rate(1000) # run 1000 times per real second
-    ball.pos = ball.pos + ball.v*dt
-    ball.v.y = ball.v.y - g*dt
+t = 0  # tatal time
+c = 0  # times of hitting ground
+td = 0 # total distance
+lh = 0 # largest height
+
+dt = 0.001 
+while c < 3: 
+    rate(1000) 
+    ball.v += vec(0, -g*dt, 0) - C_drag*ball.v*dt
+    ball.pos += ball.v*dt
     a1.pos = ball.pos
-msg.visible = False
-msg = text(text = str(ball.v.y), pos = vec(-10, 10, 0))
-print(ball.v.y)
+    a1.axis = ball.v / ball.v.mag * 2
+    if ball.pos.y <= size:
+        ball.v.y = -ball.v.y
+        c += 1
+
+    t += 0.001
+    f1.plot(pos = (t, ball.v.mag))
+
+    td += ball.v.mag*dt # total distance
+
+    if ball.pos.y >= lh:
+        lh = ball.pos.y       
+    
+d = ball.pos.x - (-15)
+
+msg = text(text = "displacement = " + str(d), pos = vec(-10, 14, 0))
+msg = text(text = "total distance = " + str(td), pos = vec(-10, 12, 0))
+msg = text(text = "largest height = " + str(lh), pos = vec(-10, 10, 0))
