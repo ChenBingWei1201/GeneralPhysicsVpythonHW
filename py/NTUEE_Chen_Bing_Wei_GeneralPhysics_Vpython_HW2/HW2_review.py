@@ -8,22 +8,28 @@ g = vector(0,-9.8,0)
 L = 2.0 - m*mag(g)/k
 theta = math.acos(1.95/2)
 
-scene = canvas(width=475, height=475, center=vec(1.0, 1.0, 0), background=vec(0.5,0.5,0), align = "left")
+scene = canvas(width = 475, height = 475, center = vec(1.0, 1.0, 0), background = vec(0.5,0.5,0), align = "left")
+scene2 = canvas(width = 300, height = 300, center = vec(8, -4, 0), background = vec(1, 1, 1), align = "right")
+msg =text(text = 'instant kenetic energy : red', pos = vec(0, 0, 0), canvas = scene2, color = color.red)
+msg =text(text = 'instant potential energy : blue', pos = vec(0, -1.5, 0), canvas = scene2, color = color.blue)
+msg =text(text = 'average kenetic energy : orange', pos = vec(0, -3, 0), canvas = scene2, color = color.orange)
+msg =text(text = 'average potential energy : green', pos = vec(0, -4.5, 0), canvas = scene2, color = color.green)
+
 
 balls = []
 springs = []
 pivots = []
 for i in range(5):
     
-    ball = sphere(radius = size, color = color.red, pos = vec(0.4*i, 0, 0))
+    ball = sphere(radius = size, color = color.red, pos = vec(0.4*i, 0, 0), canvas = scene)
     ball.m = m
     ball.v = vec(0, 0, 0)
     balls.append(ball)
     
-    pivot = sphere(radius = 0.05, color = color.black, pos = vec(0.4*i, 2.0, 0))
+    pivot = sphere(radius = 0.05, color = color.black, pos = vec(0.4*i, 2.0, 0), canvas = scene)
     pivots.append(pivot)
     
-    spring = cylinder(radius = 0.025, pos = vec(0.4*i, 2.0, 0), color = color.white)
+    spring = cylinder(radius = 0.025, pos = vec(0.4*i, 2.0, 0), color = color.white, canvas = scene)
     spring.axis = ball.pos - spring.pos
     spring.k = k
     springs.append(spring)
@@ -78,3 +84,4 @@ while True:
     
     iE = 0.0
     iU = 0.0
+    

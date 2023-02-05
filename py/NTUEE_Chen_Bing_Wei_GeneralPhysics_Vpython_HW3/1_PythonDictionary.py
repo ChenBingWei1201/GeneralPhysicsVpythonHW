@@ -1,0 +1,24 @@
+# d = {key1:value1, key2:value2, key3:value3,…}
+astro_obj = {"earth": 1, "mars": 2, "halley": 3} 
+# astro_obj is a dictionary with “earth”, “mars”, and “halley” as its keys,
+# and the corresponding values are 1, 2, and 3, respectively.
+print(astro_obj)
+print(astro_obj["mars"])
+
+astro_obj["sun"] = "s"
+print(astro_obj)
+
+astro_obj["earth"] = 0
+print(astro_obj)
+
+del astro_obj["earth"]
+print(astro_obj)
+
+print("mars" in astro_obj)
+print("earth" in astro_obj)
+print("earth" not in astro_obj)
+
+print(len(astro_obj))
+
+a = dict.copy(astro_obj)
+print(a)
