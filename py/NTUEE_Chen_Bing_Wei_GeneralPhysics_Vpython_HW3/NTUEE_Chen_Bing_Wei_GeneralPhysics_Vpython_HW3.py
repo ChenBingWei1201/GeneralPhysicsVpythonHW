@@ -28,7 +28,7 @@ moon.m = mass['moon']
 moon.pos = vec(moon_orbit['r']*cos(-theta), moon_orbit['r']*sin(-theta), 0)
 moon.v = vec(0, 0, -moon_orbit['v'])
 
-# 地-月系統動量守恆, 地-月系統質心固定
+# 地-月系統動量守恆, 地-月系統質心固定 todo:
 u = 7.36/604.36*moon.v
 d = 7.36/604.36*moon.pos
 earth.v -= u
@@ -79,7 +79,7 @@ while True:
   sun.pos += sun.v*dt
 
   scene.center = earth.pos
-  
+  # todo:
   moon_norm.pos = earth.pos
   eclip_norm.pos = earth.pos
   moon_norm.axis = 3*radius['earth']*norm(cross(moon.pos-earth.pos,moon.v-earth.v))
