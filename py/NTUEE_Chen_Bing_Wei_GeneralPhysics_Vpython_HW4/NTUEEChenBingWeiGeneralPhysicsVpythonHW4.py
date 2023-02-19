@@ -10,7 +10,7 @@ d = 0.4         # length between two adjacent balls = 0.4 (m)
 
 # some setting for illustrating the graph
 scene = graph(title = 'Phonon Dispersion Relation', width=800, height = 300, align='center',\
-              background = vec(0.5, 0.5, 0))
+              background = vec(0.5, 0.5, 0), ytitle = "angular frequency", xtitle = " wavevector")
 func1 = gdots(graph = scene, color = color.red, width = 4)
 
 Unit_K, n = 2 * pi/(N*d), 10
@@ -19,7 +19,7 @@ for n in range(1, int(N/2-1)):
     Wavevector = n * Unit_K  
     phase = Wavevector * arange(N) * d      # sine function
     ball_pos, ball_orig, ball_v, spring_len = np.arange(N)*d + A*np.sin(phase), np.arange(N)*d, np.zeros(N), np.ones(N)*d
-    t, dt = 0, 3E-4
+    t, dt = 0, 0.0003
     
     while ball_pos[1] - ball_orig[1] > 0:
         
