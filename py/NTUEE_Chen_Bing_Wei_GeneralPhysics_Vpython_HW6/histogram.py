@@ -62,8 +62,10 @@ if __name__ == '__main__':
     
     For example, the 3 rows of data will yield the histogram in the figure. 
     """
-    vdist = vp.graph(width = 450)   
-    observation = ghistogram(graph = vdist, bins = np.arange(1, 3, 0.5)) 
-    observation.plot(data=[1.2, 2.3, 4])
-    observation.plot(data=[1, 1.7, 2.6]) 
-    observation.plot (data=[-0.5, 2, 2.3])  
+    vdist = vp.graph(width = 450)
+    observation = ghistogram(graph = vdist, bins = np.arange(1, 3, 0.5))
+    observation.plot(data=[1.2, 2.3, 4])            # 1-1.5 / 1.5-2 / 2-2.5 / 2.5-3
+    observation.plot(data=[1, 1.7, 2.6])            # 含下限，不含上限
+    observation.plot (data=[-0.5, 2, 2.3])          # 1 <= x < 1.5 / 1.5 <= x < 2 / ...
+#   -0.5, 1, 1.2 / 1.7 / 2, 2.3, 2.3 / 2.6, 4 
+#         3      :  1  :     3       :    2 
