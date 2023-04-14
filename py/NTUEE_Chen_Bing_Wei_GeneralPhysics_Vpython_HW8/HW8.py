@@ -7,6 +7,7 @@ E = 1000000
 q, m, size = 1.6E-19, 1E-6/6E23, 0.1E-9 #artificial charge particle
 t, dt, vrms = 0, 1E-16, 10000.0
 atoms, atoms_v = [],[]
+cCounter = 0 # counter of collision of all particles of all times
 
 #initialization
 scene = canvas(width=575, height=600,align = 'left', background=vector(0.2,0.2,0))
@@ -43,12 +44,20 @@ while True:
     pos_array[outside] = - pos_array[outside]
     
     # handle collision here
-    
-    
+    prob_array = np.random.random(N) # return an array which size is N, and every tuples are in [0.0, 1.0)
+    collision = np.less_equal(prob_array, prob)
+    for hit, n in zip(collision, range(N)):
+        if hit:
+            theta = np.random.random() * np.pi * 2
+            phi = np.random.random() * np.pi * 2
+            v_array[n] = np.array([np.sin(phi)*np.cos(theta), np.sin(phi)*np.sin(theta), np.cos(phi)])*vrms
+            cCounter += 1
+            
     vv += a_to_v(np.sum(v_array,axis = 0)/N)
     
     if int(t/dt)%2000 == 0:
-        tau = 0  # need to be modified
+        # collision time: tau = (total time t*N) / (total collision number of all particles of all time)
+        tau = t*N/cCounter  # need to be modified
         print(tau, vv/(t/dt), q*E*tau/m)
     vd_ball.pos = vv/(t/dt)
     

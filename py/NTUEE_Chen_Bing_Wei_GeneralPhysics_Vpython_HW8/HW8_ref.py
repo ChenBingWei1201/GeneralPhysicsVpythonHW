@@ -46,13 +46,14 @@ while True:
         
         # handle collision here 
         prob_array = np.random.random(N)
-        collide = np.less_equal(prob_array, prob)
-        for hit, n in zip(collide, range(N)):
+        collide = np.less_equal(prob_array, prob) # return an array([Ture], [False], ...)
+        for hit, n in zip(collide, range(N)): 
                 if hit:
                         theta = np.random.random() * np.pi*2
                         phi = np.random.random() * np.pi*2
+                        # spherical coordinate!
                         v_array[n] = np.array([np.sin(phi)*np.cos(theta),np.sin(phi)*np.sin(theta), np.cos(phi)])*vrms
-                        collideTime += 1
+                        collideTime += 1 # the counter of collision++
         """
         select = np.random.randint(N ,size = int(N * prob))
         for num in select:
