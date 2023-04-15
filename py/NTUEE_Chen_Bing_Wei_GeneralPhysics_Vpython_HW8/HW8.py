@@ -58,7 +58,7 @@ while True:
     if int(t/dt)%2000 == 0:
         # collision time: tau = (total time t*N) / (total collision number of all particles of all time)
         tau = t*N/cCounter  # need to be modified
-        print(tau, vv/(t/dt), q*E*tau/m)
+        print(f'tau={tau}', f'{vv/(t/dt)}={mag(vv/(t/dt))}', f'Vd_theorem={q*E*tau/m}') 
     vd_ball.pos = vv/(t/dt)
     
     for i in range(N): atoms_v[i].pos, atoms[i].pos = a_to_v(v_array[i]), a_to_v(pos_array[i])
